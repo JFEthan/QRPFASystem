@@ -1,0 +1,97 @@
+<RCC>
+    <qresource prefix="/pfaPage">
+        <file alias="combo-down-arrow.png">images/common/ComboDownArrow.png</file>
+        <file alias="searchbar-cancel-icon.png">images/common/SearchBarCancelIcon.png</file>
+        <file alias="fpa-background.png">images/fpaPage/Background.png</file>
+        <file alias="connected-state.png">images/fpaPage/connectedState.png</file>
+        <file alias="disconnected-state.png">images/fpaPage/disconnectedState.png</file>
+        <file alias="error-tip.png">images/fpaPage/errorTip.png</file>
+        <file alias="female-head-portrait.png">images/fpaPage/femaleHeadPortrait.png</file>
+        <file alias="male-head-portrait.png">images/fpaPage/maleHeadPortrait.png</file>
+        <file alias="master-role.png">images/fpaPage/masterRole.png</file>
+        <file alias="normal-tip.png">images/fpaPage/normalTip.png</file>
+        <file alias="slave-role.png">images/fpaPage/slaveRole.png</file>
+        <file alias="warning-tip.png">images/fpaPage/warningTip.png</file>
+        <file alias="ablation-site.png">images/fpaPage/ablationSite.png</file>
+        <file alias="add-patient.png">images/fpaPage/addPatient.png</file>
+        <file alias="end-procedure.png">images/fpaPage/endProcedure.png</file>
+        <file alias="selecte-preset.png">images/fpaPage/selectPreset.png</file>
+        <file alias="start.png">images/fpaPage/start.png</file>
+        <file alias="update.png">images/fpaPage/update.png</file>
+        <file alias="select.png">images/fpaPage/select.png</file>
+        <file alias="ablation-site-disabled.png">images/fpaPage/ablationSiteDisabled.png</file>
+        <file alias="add-patient-disabled.png">images/fpaPage/addPatientDisabled.png</file>
+        <file alias="end-procedure-disabled.png">images/fpaPage/endProcedureDisabled.png</file>
+        <file alias="select-preset-disabled.png">images/fpaPage/selectPresetDisabled.png</file>
+        <file alias="start-enable.png">images/fpaPage/startEnable.png</file>
+        <file alias="ablation-site-pressed.png">images/fpaPage/ablationSitePressed.png</file>
+        <file alias="add-patient-pressed.png">images/fpaPage/addPatientPressed.png</file>
+        <file alias="end-procedure-pressed.png">images/fpaPage/endProcedurePressed.png</file>
+        <file alias="start-pressed.png">images/fpaPage/startPressed.png</file>
+        <file alias="select-preset-pressed.png">images/fpaPage/selectPresetPressed.png</file>
+        <file alias="setting.png">images/fpaPage/setting.png</file>
+        <file alias="setting-disabled.png">images/fpaPage/settingDisable.png</file>
+        <file alias="vioce00.png">images/vioce/vioce00.png</file>
+        <file alias="vioce01.png">images/vioce/vioce01.png</file>
+        <file alias="vioce02.png">images/vioce/vioce02.png</file>
+    </qresource>
+    <qresource prefix="/ime">
+        <file alias="pinyin">GB2312_data</file>
+    </qresource>
+    <qresource prefix="/loginPage">
+        <file alias="confirm.png">images/loginPage/confirm.png</file>
+        <file alias="drop-down.png">images/loginPage/dropDown.png</file>
+        <file alias="login-background.png">images/loginPage/loginBackground.png</file>
+        <file alias="logo.png">images/loginPage/logo.png</file>
+        <file alias="password-error.png">images/loginPage/passwordError.png</file>
+        <file alias="power-off.png">images/loginPage/powerOff.png</file>
+        <file alias="user-name.png">images/loginPage/userName.png</file>
+        <file alias="user-password.png">images/loginPage/userPassword.png</file>
+        <file alias="main-menu-bakcground.png">images/loginPage/mainMenuBackground.png</file>
+        <file alias="main-menu-button-background.png">images/loginPage/mainMenuButtonBackground.png</file>
+    </qresource>
+    <qresource prefix="/messageBox">
+        <file alias="close.png">images/messageBox/close.png</file>
+        <file alias="error-background.png">images/messageBox/errorBackground.png</file>
+        <file alias="warning-background.png">images/messageBox/warningBackground.png</file>
+        <file alias="notice-background.png">images/messageBox/noticeBackground.png</file>
+        <file alias="confirm.png">images/messageBox/confirm.png</file>
+        <file alias="confirm-pressed.png">images/messageBox/confirmPressed.png</file>
+    </qresource>
+    <qresource prefix="/keyboard">
+        <file alias="backspace.png">images/keyboard/backspace.png</file>
+        <file alias="backspace-pressed.png">images/keyboard/backspacePressed.png</file>
+        <file alias="page-down.png">images/keyboard/pageDown.png</file>
+        <file alias="page-down-pressed.png">images/keyboard/pageDownPressed.png</file>
+        <file alias="page-up.png">images/keyboard/pageUp.png</file>
+        <file alias="page-up-pressed.png">images/keyboard/pageUpPressed.png</file>
+        <file alias="page-up-disabled.png">images/keyboard/pageUpDisabled.png</file>
+        <file alias="page-down-disabled.png">images/keyboard/pageDownDisabled.png</file>
+    </qresource>
+    <qresource prefix="/recordPage">
+        <file alias="clear.png">images/recordPage/clear.png</file>
+        <file alias="page-down.png">images/recordPage/pageDown.png</file>
+        <file alias="page-down-pressed.png">images/recordPage/pageDownPressed.png</file>
+        <file alias="page-up.png">images/recordPage/pageUp.png</file>
+        <file alias="page-up-pressed.png">images/recordPage/pageUpPressed.png</file>
+        <file alias="search.png">images/recordPage/search.png</file>
+    </qresource>
+    <qresource prefix="/wave">
+        <file alias="wave003.mp3">wave/003.mp3</file>
+        <file alias="wave0031.mp3">wave/0031.mp3</file>
+        <file alias="left_footswitch.mp3">wave/left_footswitch.mp3</file>
+        <file alias="countdown.mp3">wave/count_down.mp3</file>
+        <file alias="foot_switch.wav">wave/GAME23.WAV</file>
+    </qresource>
+    <qresource prefix="/rf">
+        <file alias="down.png">RFA/down.png</file>
+        <file alias="edit_ctrl.png">RFA/editCtrl.png</file>
+        <file alias="irrigation_ctrl.png">RFA/irrgationCtrl.png</file>
+        <file alias="system_ctrl.png">RFA/systemCtrl.png</file>
+        <file alias="up.png">RFA/up.png</file>
+        <file alias="angle.png">RFA/angle.png</file>
+    </qresource>
+    <qresource prefix="/qss">
+        <file alias="css.qss">PfasViewerStyle.qss</file>
+    </qresource>
+</RCC>

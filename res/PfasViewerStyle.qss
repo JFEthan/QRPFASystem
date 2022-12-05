@@ -1,0 +1,129 @@
+QWidget {
+    font-size: 25px;
+    font-weight: 300;
+    font-family: "思源黑体 Bold";
+}
+
+QPushButton:enabled {
+    border-radius: 20px;
+}
+QPushButton:disabled {
+    color: #686868;
+}
+
+QLineEdit {
+    padding: 0px 10px;
+    border-radius: 10px;
+}
+.AblationPage{
+    border-image: url(":/pfaPage/fpa-background.png");
+}
+
+
+/* ---------------------------------- keyboard ---------------------------------- */
+.PfasWidgetKeyboard .PfasNumberKeyboard #backgroundWidget,
+.PfasWidgetKeyboard .PfasCharacterKeyboard #backgroundWidget {
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: #031033;
+    border-top: 2px solid #F6F7FC;
+    border-left: 2px solid #F6F7FC;
+    border-right: 2px solid #F6F7FC;
+    border-bottom: none;
+}
+
+.PfasWidgetKeyboard #backgroundWidget{
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-color: #031033;
+    border-top: none;
+    border-left: 2px solid #F6F7FC;
+    border-right: 2px solid #F6F7FC;
+    border-bottom: 2px solid #F6F7FC;
+}
+
+.PfasWidgetKeyboard .PfasCharacterKeyboard #previewWidget {
+    border-radius: 35px;
+    background-color: #F6F7FC;
+}
+
+.PfasWidgetKeyboard QPushButton {
+    font-size: 50px;
+    min-width: 100px;
+    max-width: 100px;
+    min-height: 70px;
+    max-height: 70px;
+    border-radius: 35px;
+    background-color: #F6F7FC;
+}
+
+.PfasWidgetKeyboard QPushButton:pressed {
+    color: #F6F7FC;
+    background-color: #3866E6;
+}
+
+.PfasWidgetKeyboard #btnEsc,
+.PfasWidgetKeyboard #btnReturn,
+.PfasWidgetKeyboard #btnNumber,
+.PfasWidgetKeyboard #btnSwitch,
+.PfasWidgetKeyboard #btnClear {
+    min-width: 180px;
+    max-width: 180px;
+}
+
+.PfasWidgetKeyboard #btnSpace {
+    min-width: 500px;
+    max-width: 500px;
+}
+
+.PfasWidgetKeyboard .PfasCharacterKeyboard #btnPageUp{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(":/keyboard/page-up.png");
+}
+
+.PfasWidgetKeyboard .PfasCharacterKeyboard #btnPageUp:pressed{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(":/keyboard/page-up-pressed.png");
+}
+
+.PfasWidgetKeyboard .PfasCharacterKeyboard #btnPageUp:disabled{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(":/keyboard/page-up-disabled.png");
+}
+
+.PfasWidgetKeyboard .PfasCharacterKeyboard #btnPageDown{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(":/keyboard/page-down.png");
+}
+
+.PfasWidgetKeyboard .PfasCharacterKeyboard #btnPageDown:pressed{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(":/keyboard/page-down-pressed.png");
+}
+
+.PfasWidgetKeyboard .PfasCharacterKeyboard #btnPageDown:disabled{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(":/keyboard/page-down-disabled.png");
+}
+
+.PfasWidgetKeyboard .PfasCharacterKeyboard #btnBack{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(":/keyboard/backspace.png");
+}
+
+.PfasWidgetKeyboard .PfasCharacterKeyboard #btnBack:pressed{
+	background-position: center;
+	background-repeat: no-repeat;
+	background-image: url(":/keyboard/backspace-pressed.png");
+}
