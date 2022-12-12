@@ -18,6 +18,25 @@ CustomWidget::~CustomWidget()
     delete ui;
 
 }
+
+void CustomWidget::destroyMainLayoutWidget(QLayout* layout){
+    if(layout == nullptr) return;
+     QLayoutItem *child;
+    int num = layout->count();
+    if(num > 0 && !layout->isEmpty()){
+        while ((child = layout->takeAt(0)) != nullptr) {
+            if(child->widget())
+            {
+                child->widget()->setParent(nullptr);
+            }
+            else if(child->layout()){
+                destroyMainLayoutWidget(child->layout());
+            }
+             //delete child;
+        }
+    }
+
+}
 void CustomWidget::setCustomPlotMode(CustomPlotMode modeType)
 {
     customPlotmode = modeType;
@@ -122,17 +141,34 @@ void CustomWidget::UninitPlot()
     }
    if(mTempGraph) customPlot->removeGraph(mTempGraph);
    if(mPowerGraph) customPlot->removeGraph(mPowerGraph);
+   destroyMainLayoutWidget(baseLayout);
+   destroyMainLayoutWidget(hRfAllLayout);
+   destroyMainLayoutWidget(hlayoutTypeTop);
+   destroyMainLayoutWidget(hRFPuncture);
+
 
     if(customPlot != nullptr)
     {
         delete  customPlot;
         customPlot = nullptr;
     }
-    if(baseLayout)
+    if(hRfAllLayout != nullptr)
     {
-        delete  baseLayout;
-        baseLayout = nullptr;
+        delete  hRfAllLayout;
+        hRfAllLayout = nullptr;
     }
+    if(hlayoutTypeTop != nullptr)
+    {
+        delete  hlayoutTypeTop;
+        hlayoutTypeTop = nullptr;
+    }
+    if(hRFPuncture != nullptr)
+    {
+        delete  hRFPuncture;
+        hRFPuncture = nullptr;
+    }
+    unInitButton();
+
 }
 void CustomWidget::initButton(){
 
@@ -209,6 +245,86 @@ void CustomWidget::initButton(){
     horizontalSpacer4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
     horizontalSpacer5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
     horizontalSpacer6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+}
+void CustomWidget::unInitButton()
+{
+
+   if(baseLayout != nullptr)
+   {
+       delete baseLayout;
+       baseLayout = nullptr;
+   }
+   if(pressure_button != nullptr)
+   {
+       delete pressure_button;
+       pressure_button = nullptr;
+   }
+
+   if(angle_button != nullptr)
+   {
+       delete angle_button;
+       angle_button = nullptr;
+   }
+
+   if(flow_speed_button != nullptr)
+   {
+       delete flow_speed_button;
+       flow_speed_button = nullptr;
+   }
+
+   if(time_button != nullptr)
+   {
+       delete time_button;
+       time_button = nullptr;
+   }
+
+   if(temperature_button != nullptr)
+   {
+       delete temperature_button;
+       temperature_button = nullptr;
+   }
+
+   if(impedance_button != nullptr)
+   {
+       delete impedance_button;
+       impedance_button = nullptr;
+   }
+   if(power_button != nullptr)
+   {
+       delete power_button;
+       power_button = nullptr;
+   }
+   if(horizontalSpacer1 != nullptr)
+   {
+       delete horizontalSpacer1;
+       horizontalSpacer1 = nullptr;
+   }
+   if(horizontalSpacer2 != nullptr)
+   {
+       delete horizontalSpacer2;
+       horizontalSpacer2 = nullptr;
+   }
+   if(horizontalSpacer3 != nullptr)
+   {
+       delete horizontalSpacer3;
+       horizontalSpacer3 = nullptr;
+   }
+   if(horizontalSpacer4 != nullptr)
+   {
+       delete horizontalSpacer4;
+       horizontalSpacer4 = nullptr;
+   }
+   if(horizontalSpacer5 != nullptr)
+   {
+       delete horizontalSpacer5;
+       horizontalSpacer5 = nullptr;
+   }
+   if(horizontalSpacer6 != nullptr)
+   {
+       delete horizontalSpacer6;
+       horizontalSpacer6 = nullptr;
+   }
+
 }
 void CustomWidget::HideAllButton()
 {

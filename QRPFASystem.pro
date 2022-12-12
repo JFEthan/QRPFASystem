@@ -23,14 +23,18 @@ SOURCES += \
     toolbar/Keyboard/PfasNumberKeyboard.cxx \
     toolbar/Keyboard/PfasWidgetKeyboard.cxx \
     toolbar/NumericBar/numericbar.cpp \
+    toolbar/PFActionbar/pfactionbar.cpp \
+    toolbar/PFIntegratedaBar/pfintegratedabar.cpp \
     toolbar/Pageswitchbar/pageswitchbar.cpp \
     toolbar/Puncturebar/puncturebar.cpp \
     toolbar/RFActionbar/rfactionbar.cpp \
     toolbar/RPFStatusBar/rpfstatusbar.cpp \
     toolbar/RingElectrodebar/ringelectrodebar.cpp \
     toolbar/accuCustomplot/customwidget.cpp \
+    toolbar/accuCustomplot/ecgcustomwidget.cpp \
     toolbar/accuCustomplot/qcustomplot.cpp \
-    toolbar/customWidgets/PfasButton.cxx
+    toolbar/customWidgets/PfasButton.cxx \
+    toolbar/customWidgets/SwitchButton.cxx
 
 HEADERS += \
     ablationPage/ablationpage.h \
@@ -46,14 +50,18 @@ HEADERS += \
     toolbar/Keyboard/PfasNumberKeyboard.h \
     toolbar/Keyboard/PfasWidgetKeyboard.h \
     toolbar/NumericBar/numericbar.h \
+    toolbar/PFActionbar/pfactionbar.h \
+    toolbar/PFIntegratedaBar/pfintegratedabar.h \
     toolbar/Pageswitchbar/pageswitchbar.h \
     toolbar/Puncturebar/puncturebar.h \
     toolbar/RFActionbar/rfactionbar.h \
     toolbar/RPFStatusBar/rpfstatusbar.h \
     toolbar/RingElectrodebar/ringelectrodebar.h \
     toolbar/accuCustomplot/customwidget.h \
+    toolbar/accuCustomplot/ecgcustomwidget.h \
     toolbar/accuCustomplot/qcustomplot.h \
-    toolbar/customWidgets/PfasButton.h
+    toolbar/customWidgets/PfasButton.h \
+    toolbar/customWidgets/SwitchButton.h
 
 FORMS += \
     ablationPage/ablationpage.ui \
@@ -65,12 +73,15 @@ FORMS += \
     toolbar/Keyboard/PfasCharacterKeyboard.ui \
     toolbar/Keyboard/PfasNumberKeyboard.ui \
     toolbar/Keyboard/PfasWidgetKeyboard.ui \
+    toolbar/PFActionbar/pfactionbar.ui \
+    toolbar/PFIntegratedaBar/pfintegratedabar.ui \
     toolbar/Pageswitchbar/pageswitchbar.ui \
     toolbar/Puncturebar/puncturebar.ui \
     toolbar/RFActionbar/rfactionbar.ui \
     toolbar/RPFStatusBar/rpfstatusbar.ui \
     toolbar/RingElectrodebar/ringelectrodebar.ui \
-    toolbar/accuCustomplot/customwidget.ui
+    toolbar/accuCustomplot/customwidget.ui \
+    toolbar/accuCustomplot/ecgcustomwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -80,6 +91,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     res/viewer.qrc
 
-DISTFILES +=
+DISTFILES += \
+    res/PfasViewerStyle.qss
 
 

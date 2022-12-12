@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>PfAblationContent</class>
- <widget class="QWidget" name="PfAblationContent">
+ <author/>
+ <comment/>
+ <exportmacro/>
+ <class>ECGCustomWidget</class>
+ <widget class="QWidget" name="ECGCustomWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1020</width>
-    <height>611</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
  </widget>
- <resources/>
+ <pixmapfunction/>
  <connections/>
 </ui>

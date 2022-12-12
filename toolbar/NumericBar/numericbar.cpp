@@ -19,6 +19,14 @@ Numericbar::Numericbar(QWidget *parent) :
 
 }
 
+Numericbar::~Numericbar()
+{
+    if(showThresholValue)
+    {
+        delete  showThresholValue;
+        showThresholValue = nullptr;
+    }
+}
 
 void Numericbar::SetType(typeNumericBar type)
 {

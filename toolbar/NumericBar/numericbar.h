@@ -30,6 +30,7 @@ public:
     };
 public:
     Numericbar(QWidget *parent = 0);
+    ~Numericbar() ;
 
 public:
     void SetType(typeNumericBar type);

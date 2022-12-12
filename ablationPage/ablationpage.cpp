@@ -20,6 +20,7 @@ AblationPage::AblationPage(QWidget *parent) :
 AblationPage::~AblationPage()
 {
     delete ui;
+    OnDestroy();
 }
 void AblationPage::paintEvent(QPaintEvent *event)
 {
@@ -40,7 +41,7 @@ void AblationPage::OnCreate()
     ui->stackedWidget->addWidget(rf_puncturen_content);
     ui->stackedWidget->addWidget(rpfa_summary_comtent);
 
-    ui->stackedWidget->setCurrentWidget(rf_ablation_content);
+    ui->stackedWidget->setCurrentWidget(pf_ablation_content);
 
 
     connect(ui->pageSwitchBar, SIGNAL(MainButtonClicked()), this, SLOT(OnMainButtonClicked()));
@@ -52,7 +53,26 @@ void AblationPage::OnCreate()
 }
 void AblationPage::OnDestroy()
 {
-
+    if(pf_ablation_content != nullptr)
+    {
+        delete pf_ablation_content;
+        pf_ablation_content = nullptr;
+    }
+    if(rf_ablation_content != nullptr)
+    {
+        delete rf_ablation_content;
+        rf_ablation_content = nullptr;
+    }
+    if(rf_puncturen_content != nullptr)
+    {
+        delete rf_puncturen_content;
+        rf_puncturen_content = nullptr;
+    }
+    if(rpfa_summary_comtent != nullptr)
+    {
+        delete rpfa_summary_comtent;
+        rpfa_summary_comtent = nullptr;
+    }
 }
 void AblationPage::OnInitialize()
 {
