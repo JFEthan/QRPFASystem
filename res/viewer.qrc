@@ -34,6 +34,7 @@
         <file alias="vioce00.png">images/vioce/vioce00.png</file>
         <file alias="vioce01.png">images/vioce/vioce01.png</file>
         <file alias="vioce02.png">images/vioce/vioce02.png</file>
+        <file alias="widget-background.png">images/fpaPage/BackgroundWidget.png</file>
     </qresource>
     <qresource prefix="/ime">
         <file alias="pinyin">GB2312_data</file>

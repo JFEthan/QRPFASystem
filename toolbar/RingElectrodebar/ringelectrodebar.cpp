@@ -4,15 +4,14 @@
 #include <QStyleOption>
 #include <QDebug>
 #include <QtMath>
-
+#include <QMouseEvent>
 
 const qreal show_ratio = 0.9;
 const qreal switch_space = 5;
 const qreal border_radius = 10;
-const qreal electrode_number = 10;
 const qreal enable_threshold = 0.8;
 const qreal inter_electrode_angle = 5;
-const qreal item_angle = 360 / electrode_number;
+const qreal start_button_angle = 32;
 
 
 RingElectrodeBar::RingElectrodeBar(QWidget *parent)
@@ -24,22 +23,74 @@ RingElectrodeBar::RingElectrodeBar(QWidget *parent)
     switchTimer->setInterval(10);
     switchTimer->setSingleShot(false);
     connect(switchTimer, &QTimer::timeout, this, &RingElectrodeBar::updateSwitchValue);
+
+    connect(this, &RingElectrodeBar::StartButtonClicked, this, &RingElectrodeBar::updateSwitchValue);
+    connect(this, &RingElectrodeBar::UpdateButtonClicked, this, &RingElectrodeBar::OnElectrodeUpdateRequest);
+    connect(this, &RingElectrodeBar::SwitchButtonClicked, this, &RingElectrodeBar::OnElectrodeSwitchRequest);
+    connect(this, &RingElectrodeBar::ElectrodeSelected, this, &RingElectrodeBar::OnElectrodeSelectedRequest);
+
+
+    OnElectrodeUpdateRequest();
 }
 
 RingElectrodeBar::~RingElectrodeBar()
 {
     delete ui;
+    if(switchTimer)
+    {
+        delete switchTimer;
+        switchTimer = nullptr;
+    }
 }
-void RingElectrodeBar::SetPresetType(preset_t  _switchValue)
+void RingElectrodeBar::SetPresetType(power_preset_t  _switchValue)
 {
     switchValue = _switchValue;
+}
+void RingElectrodeBar::SetElectrodeNumber(int nCount)
+{
+    electrode_number = nCount;
+    electrode_item_angle = 360 / electrode_number;
 }
 void RingElectrodeBar::SetImpedanceInfoEnable(bool impdedanceInfoenamble_)
 {
     impedanceInfoEnable = impdedanceInfoenamble_;
 }
+
+
+void RingElectrodeBar::resetDefaultValue() {
+  auto changed = this->size().height() *0.5*0.8;
+  if (ring_widget_radius != changed)
+  {
+      ring_widget_radius = changed;
+      ballRadius = ring_widget_radius*0.12 ;
+
+      startButtonTrackAngle = start_button_angle * 0.6;
+      auto distance = GetButtonRingRadius();
+      auto radius = (distance.second + distance.first) / 2;
+      startButtonTrackLength = qSin(qDegreesToRadians(startButtonTrackAngle / 2)) * radius * 2;
+
+
+      QFont font = this->font();
+      font.setBold(true);
+      font.setPixelSize(25);
+      titleFont = font;
+      font.setPixelSize(30);
+      counterFont = font;
+      font.setPixelSize(ballRadius);
+      textFont = font;
+
+      textWidth = qMax(QFontMetrics(font).width(tr("Low")), QFontMetrics(font).width(tr("High"))) * 1.8;
+      switchStep = textWidth / 15;
+      switchStartX = getChecked() ? 0 : textWidth;
+  }
+}
+std::pair<qreal, qreal> RingElectrodeBar::GetButtonRingRadius() {
+  return std::pair<qreal, qreal>(ring_widget_radius * (1 + 0.2), ring_widget_radius * (1 + 0.5));
+}
+
 void RingElectrodeBar::paintEvent(QPaintEvent *event)
 {
+    resetDefaultValue();
     QStyleOption opt;
     opt.initFrom(this);
     QPainter p(this);
@@ -47,6 +98,7 @@ void RingElectrodeBar::paintEvent(QPaintEvent *event)
 
     QPainter painter(this);
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+    painter.translate(width() / 2, height() / 2);
 
     DrawSwitch(&painter);
     DrawElectrode(&painter);
@@ -54,44 +106,86 @@ void RingElectrodeBar::paintEvent(QPaintEvent *event)
     DrawUpdateButton(&painter);
 
 }
-void RingElectrodeBar::mousePressEvent(QMouseEvent *)
+void RingElectrodeBar::mousePressEvent(QMouseEvent *event)
 {
-
+    auto offset = QPoint(this->width() / 2, this->height() / 2);
+     auto point = event->pos() - offset;
+     if (startPath->contains(point)) {
+       if (startEnable && !startButtonChangedFlag) {
+         startButtonChangedFlag = true;
+         pressedPoint = event->pos();
+       }
+       return;
+     } else if (updatePath->contains(point)) {
+       emit UpdateButtonClicked();
+       return;
+     } else if (switchPath->contains(point)) {
+       emit SwitchButtonClicked();
+       return;
+     }
+     else {
+       auto degrees = static_cast<int>(ceil(qRadiansToDegrees(qAtan2(point.y(), point.x())) + 90 + 360)) % 360;
+       auto index = ceil(degrees / electrode_item_angle);
+       if (index >= 1 && index <= electrode_number) {
+         lock_guard_t lock_t(electrode_state_mutex);
+         auto electrode_item = electrode_state[index - 1];
+         if (electrode_item.ringPath->contains(point) || electrode_item.ballPath->contains(point)) {
+           emit ElectrodeSelected(index);
+           return;
+         }
+       }
+     }
 }
 void RingElectrodeBar::mouseMoveEvent(QMouseEvent *)
 {
-
+    if (startButtonChangedFlag) {
+      startButtonChangedFlag = false;
+      auto percent = startButtonPositionPercent;
+      OnStartButtonTrigger(startButtonChangedFlag, 0);
+      if (percent > enable_threshold) {
+        emit this->StartButtonClicked();
+      }
+    }
 }
+void RingElectrodeBar::OnStartButtonTrigger(bool isTrigger, float percent) {
+  startButtonChangedFlag = isTrigger;
+  startButtonPositionPercent = percent;
+  repaint();
+}
+
 bool RingElectrodeBar::CheckDischarge(int index) {
   return isAllSelected || (selecting_state && index == electrode_selected_start) ||
          (!selecting_state && index >= electrode_selected_start && index <= electrode_selected_end);
 }
 
-void RingElectrodeBar::resetDefaultValue() {
-//  auto changed = this->size().height() * show_ratio * 0.5;
+bool RingElectrodeBar::getChecked() const { return switchValue == RingElectrodeBar::power_preset_t::low; }
 
-//  if (ring_widget_radius != changed) {
-//    ring_widget_radius = changed;
-//    ballRadius = ring_widget_radius * 0.12;
-//    QFont font = this->font();
-//    font.setBold(true);
-//    font.setPixelSize(25);
-//    titleFont = font;
-//    font.setPixelSize(30);
-//    counterFont = font;
-//    font.setPixelSize(ballRadius);
-//    textFont = font;
-//    startButtonTrackAngle = (item_angle - inter_electrode_angle) * 0.6;
-//    auto distance = GetButtonRingRadius();
-//    auto radius = (distance.second + distance.first) / 2;
-//    startButtonTrackLength = qSin(qDegreesToRadians(startButtonTrackAngle / 2)) * radius * 2;
-//    textWidth = qMax(QFontMetrics(font).width(tr("Low")), QFontMetrics(font).width(tr("High"))) * 1.8;
-//    switchStep = textWidth / 15;
-//    switchStartX = getChecked() ? 0 : textWidth;
-//  }
+void RingElectrodeBar::OnElectrodeSelectedRequest(int index) {
+    if (!selecting_state) {
+        selecting_state = true;
+        isAllSelected = false;
+        electrode_selected_start = index;
+      } else {
+        selecting_state = false;
+        auto indexTmp = electrode_selected_start;
+        if (index == electrode_selected_start) {
+          electrode_selected_start = 1;
+          electrode_selected_end = electrode_number;
+        } else {
+          electrode_selected_start = qMin(indexTmp, index);
+          electrode_selected_end = qMax(indexTmp, index);
+        }
+        isAllSelected = (electrode_selected_start == 1 && electrode_selected_end == electrode_number);
+      }
+      update();
 }
-bool RingElectrodeBar::getChecked() const { return switchValue == RingElectrodeBar::preset_t::low; }
 
+void RingElectrodeBar::OnElectrodeSwitchRequest() {
+  switchStartX = getChecked() ? 0 : textWidth;
+  switchValue = static_cast<power_preset_t>(1 ^ static_cast<int>(switchValue));
+  emit PresetChanged(switchValue);
+  switchTimer->start();
+}
 void RingElectrodeBar::DrawSwitch(QPainter *painter)
 {
   painter->save();
@@ -107,7 +201,7 @@ void RingElectrodeBar::DrawSwitch(QPainter *painter)
   painter->setPen(Qt::NoPen);
   QColor color = isChecked ? "#3866E6" : "#FFDB94";
   painter->setBrush(QBrush(color));
-  auto difference = this->switchTimer->isActive() ? switchStartX : ((switchValue == preset_t::low) ? 0 : textWidth);
+  auto difference = this->switchTimer->isActive() ? switchStartX : ((switchValue == power_preset_t::low) ? 0 : textWidth);
   QRect rect(-textWidth / 2 - ballRadius + difference, -ballRadius, ballRadius * 2, ballRadius * 2);
   painter->drawEllipse(rect);
   painter->restore();
@@ -139,7 +233,7 @@ void RingElectrodeBar::DrawElectrode(QPainter *painter)
     }
     painter->setPen(pen);
     auto dischargeColor = CheckDischarge(count) ? QColor("#FFDB94") : QColor("#F6F7FA");
-    auto centreAngle = start + (item_angle - inter_electrode_angle) / 2;
+    auto centreAngle = start + start_button_angle / 2;
     auto centreCosY = -qCos(qDegreesToRadians(centreAngle));
     auto centreSinX = qSin(qDegreesToRadians(centreAngle));
     QRadialGradient radial(0, 0, ring_widget_radius, innerRingRadius * centreSinX * 0.6, innerRingRadius * centreCosY * 0.6);
@@ -154,10 +248,6 @@ void RingElectrodeBar::DrawElectrode(QPainter *painter)
     painter->drawText(item.ballPath->boundingRect(), Qt::AlignCenter, QString("%1").arg(count));
     start += angle;
     ++count;
-//    if(bWarning)
-//    {
-//      emit SendWarningMsgSingle();
-//    }
   }
   painter->restore();
 }
@@ -165,14 +255,12 @@ void RingElectrodeBar::DrawStartButton(QPainter *painter)
 {
     painter->save();
  auto distance = GetButtonRingRadius();
- auto angle = item_angle - inter_electrode_angle;
- auto ringWidth = (distance.second - distance.first);
+ auto angle = start_button_angle;
+
  painter->setPen(Qt::NoPen);
  painter->setBrush(startEnable ? QBrush("#3866e6") : QBrush("#828282"));
  DrawRoundedRingBorder(painter, 90 - angle / 2, angle, distance.first, distance.second);
- auto radius = ringWidth * 0.8 / 2;
- auto startAngle = 90 - startButtonTrackAngle / 2;
- auto startOffset = startButtonChangedFlag ? startButtonTrackAngle * startButtonPositionPercent : 0;
+
  painter->setPen(QPen(QBrush("#F6F7FC"), 4));
  painter->setBrush(Qt::NoBrush);
  auto lineRadius = (distance.first + distance.second) / 2;
@@ -181,7 +269,14 @@ void RingElectrodeBar::DrawStartButton(QPainter *painter)
  auto startSignal = startButtonChangedFlag && startButtonPositionPercent > enable_threshold;
  painter->setPen(Qt::NoPen);
  painter->setBrush(startSignal ? QBrush("#FFDB94") : QBrush("#F6F7FC"));
- auto path = DrawBall(painter, startAngle + startOffset, ringWidth / 2 + distance.first, radius);
+
+
+ auto pathWidth = (distance.second - distance.first);
+ auto radius = pathWidth * 0.8 / 2;
+ auto startAngle = 90 - startButtonTrackAngle / 2;
+ auto startOffset = startButtonChangedFlag ? startButtonTrackAngle * startButtonPositionPercent : 0;
+ auto path = DrawBall(painter, startAngle + startOffset, pathWidth / 2 + distance.first, radius);
+
  if (!startButtonChangedFlag) {
    startPath = path;
  }
@@ -196,7 +291,7 @@ void RingElectrodeBar::DrawUpdateButton(QPainter *painter)
 {
     painter->save();
  auto distance = GetButtonRingRadius();
- auto angle = item_angle - inter_electrode_angle;
+ auto angle = start_button_angle;
  auto ringWidth = (distance.second - distance.first);
  painter->setPen(Qt::NoPen);
  painter->setBrush(QBrush("#3866e6"));
@@ -214,7 +309,7 @@ void RingElectrodeBar::DrawImpedanceInfo(QPainter *painter)
 {
     painter->save();
      auto distance = GetButtonRingRadius();
-     auto angle = item_angle - inter_electrode_angle;
+     auto angle = start_button_angle;
      auto ringWidth = (distance.second - distance.first);
      painter->setPen(Qt::NoPen);
      painter->setBrush(QBrush("#3866e6"));
@@ -246,7 +341,7 @@ RingElectrodeBar::PathPtr RingElectrodeBar::DrawSwitchBackground(QPainter *paint
 
 void RingElectrodeBar::updateSwitchValue() {
   switch (static_cast<int>(switchValue)) {
-    case static_cast<int>(preset_t::low): {
+    case static_cast<int>(power_preset_t::low): {
       auto offset = switchStartX - switchStep;
       if (offset > 0) {
         switchStartX = offset;
@@ -256,7 +351,7 @@ void RingElectrodeBar::updateSwitchValue() {
       }
       break;
     }
-    case static_cast<int>(preset_t::high): {
+    case static_cast<int>(power_preset_t::high): {
       auto offset = switchStartX + switchStep;
       if (offset < textWidth) {
         switchStartX = offset;
@@ -317,6 +412,23 @@ RingElectrodeBar::PathPtr RingElectrodeBar::DrawBall(QPainter *painter, qreal an
   painter->restore();
   return path;
 }
-std::pair<qreal, qreal> RingElectrodeBar::GetButtonRingRadius() {
-  return std::pair<qreal, qreal>(ring_widget_radius * (1 + 0.2), ring_widget_radius * (1 + 0.5));
+
+void RingElectrodeBar::OnElectrodeUpdateRequest() {
+  isAllSelected = true;
+  selecting_state = false;
+  {
+    lock_guard_t lock_t(electrode_state_mutex);
+    electrode_state.clear();
+  }
+
+  electrode_selected_start = 1;
+  electrode_selected_end = electrode_number;
+
+  {
+    lock_guard_t lock_t(electrode_state_mutex);
+    electrode_state.resize(electrode_number, ElectrodeItem{});
+  }
+
+  update();
 }
+

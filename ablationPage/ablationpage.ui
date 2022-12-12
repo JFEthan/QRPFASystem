@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1944</width>
+    <width>1451</width>
     <height>649</height>
    </rect>
   </property>
@@ -18,7 +18,7 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>1944</width>
+    <width>1920</width>
     <height>1080</height>
    </size>
   </property>
@@ -41,7 +41,7 @@
     <number>30</number>
    </property>
    <item row="0" column="0">
-    <layout class="QGridLayout" name="top_gridLayout" columnstretch="20,75,1600,100">
+    <layout class="QGridLayout" name="top_gridLayout" columnstretch="80,420,1120,300">
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
@@ -98,7 +98,7 @@
         <widget class="QWidget" name="patientInfo" native="true">
          <property name="minimumSize">
           <size>
-           <width>300</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
@@ -121,7 +121,7 @@
         <enum>QLayout::SetDefaultConstraint</enum>
        </property>
        <property name="leftMargin">
-        <number>80</number>
+        <number>8</number>
        </property>
        <property name="topMargin">
         <number>0</number>
@@ -130,13 +130,13 @@
         <widget class="PageSwitchBar" name="pageSwitchBar" native="true">
          <property name="minimumSize">
           <size>
-           <width>200</width>
-           <height>20</height>
+           <width>0</width>
+           <height>0</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
-           <width>900</width>
+           <width>1000</width>
            <height>70</height>
           </size>
          </property>
@@ -169,16 +169,16 @@
         <enum>QLayout::SetDefaultConstraint</enum>
        </property>
        <property name="leftMargin">
-        <number>10</number>
+        <number>0</number>
        </property>
        <property name="topMargin">
-        <number>20</number>
+        <number>0</number>
        </property>
        <item>
         <widget class="QLabel" name="label_clock">
          <property name="minimumSize">
           <size>
-           <width>300</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
@@ -200,7 +200,7 @@
         <widget class="QWidget" name="tipInfo" native="true">
          <property name="minimumSize">
           <size>
-           <width>300</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>
@@ -283,21 +283,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QWidget" name="catheterComboBox" native="true">
-         <property name="minimumSize">
-          <size>
-           <width>200</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
+        <widget class="QPushButton" name="btnCatheter">
+         <property name="text">
+          <string>Catheter</string>
          </property>
         </widget>
        </item>

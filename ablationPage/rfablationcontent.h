@@ -2,7 +2,7 @@
 #define RFABLATIONCONTENT_H
 
 #include <QWidget>
-
+class CustomWidget;
 namespace Ui {
 class RfAblationContent;
 }
@@ -14,8 +14,8 @@ class RfAblationContent : public QWidget
 public:
     explicit RfAblationContent(QWidget *parent = nullptr);
     ~RfAblationContent();
-
 private:
+    CustomWidget *custom_widget = nullptr;
     Ui::RfAblationContent *ui;
 };
 

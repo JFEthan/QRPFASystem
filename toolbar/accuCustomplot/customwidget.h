@@ -1,4 +1,4 @@
-#ifndef CUSTOMWIDGET_H
+﻿#ifndef CUSTOMWIDGET_H
 #define CUSTOMWIDGET_H
 
 #include <QWidget>
@@ -72,7 +72,9 @@ private:
     void initPlot();
     void UninitPlot();
     void initButton();
+    void unInitButton();
     void removeBaseLayout();
+    void destroyMainLayoutWidget(QLayout* layout);
 
     virtual void resizeEvent(QResizeEvent *event);
     virtual void paintEvent(QPaintEvent *event);

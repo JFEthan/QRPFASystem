@@ -2,8 +2,8 @@
  <author/>
  <comment/>
  <exportmacro/>
- <class>Puncturebar</class>
- <widget class="QWidget" name="Puncturebar">
+ <class>ECGCustomWidget</class>
+ <widget class="QWidget" name="ECGCustomWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

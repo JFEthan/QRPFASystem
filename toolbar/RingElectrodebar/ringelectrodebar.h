@@ -5,7 +5,8 @@
 #include <QPainter>
 #include <QPainterPath>
 #include <QTimer>
-#include <QVector>
+#include <vector>
+#include <mutex>
 
 namespace Ui {
 class RingElectrodeBar;
@@ -16,7 +17,7 @@ class RingElectrodeBar : public QWidget
     Q_OBJECT
     using PathPtr = std::shared_ptr<QPainterPath>;
 public:
-   enum preset_t{
+   enum power_preset_t{
         low = 0,
         high = 1
       };
@@ -37,7 +38,8 @@ public:
     explicit RingElectrodeBar(QWidget *parent = nullptr);
     ~RingElectrodeBar();
 
-    void SetPresetType(preset_t  _switchValue);
+    void SetPresetType(power_preset_t  _switchValue);
+    void SetElectrodeNumber(int number);
     void resetDefaultValue();
     void SetImpedanceInfoEnable(bool impdedanceInfoenamble);
 private:
@@ -53,16 +55,26 @@ private:
   void DrawImpedanceInfo(QPainter *);
   RingElectrodeBar::PathPtr DrawSwitchBackground(QPainter *painter, qreal radius) ;
   RingElectrodeBar::PathPtr DrawRoundedRingBorder(QPainter *painter, qreal startAngle, qreal sweepLength, qreal innerRadius, qreal outerRadius);
-  RingElectrodeBar::PathPtr DrawBall(QPainter *painter, qreal angle, qreal distance, qreal radius, bool isPaint = false);
-
-
+  RingElectrodeBar::PathPtr DrawBall(QPainter *painter, qreal angle, qreal distance, qreal radius, bool isPaint = true);
   std::pair<qreal, qreal> GetButtonRingRadius();
 private:
-
   bool CheckDischarge(int index) ;
+  void OnStartButtonTrigger(bool isTrigger, float percent);
+
+signals:
+  void StartButtonClicked();
+  void UpdateButtonClicked();
+  void SwitchButtonClicked();
+  void ElectrodeSelected(int);
+  void PresetChanged(power_preset_t preset_t);
 private slots:
+  void OnElectrodeUpdateRequest();
+  void OnElectrodeSwitchRequest();
+  void OnElectrodeSelectedRequest(int);
+
    void updateSwitchValue() ;
    bool getChecked() const;
+public slots:
 
 private:
     Ui::RingElectrodeBar *ui;
@@ -73,17 +85,28 @@ private:
   PathPtr impsetStartPaht= nullptr;
   PathPtr impsetClosePaht= nullptr;
 private:
-  QFont textFont;
+   qreal electrode_number = 10;
+   qreal electrode_item_angle = 36;
+
+private:
+   QFont textFont;
+   QFont titleFont;
+   QFont counterFont;
+   QPoint pressedPoint;
   qreal textWidth = 0;
   qreal ballRadius = 0;
 
   QTimer *switchTimer = nullptr;
   qreal switchStep = 0;
   int switchStartX = 0;
-  preset_t switchValue = preset_t::high;
+  power_preset_t switchValue = power_preset_t::high;
 
   qreal ring_widget_radius = 0;
-  QVector<ElectrodeItem> electrode_state = {};
+
+  using lock_guard_t = std::lock_guard<std::mutex>;
+  std::mutex electrode_state_mutex;
+  std::vector<ElectrodeItem> electrode_state = {};
+//  QVector<ElectrodeItem> electrode_state = {};
   bool impedanceInfoEnable = false;
 
   bool isAllSelected = true;

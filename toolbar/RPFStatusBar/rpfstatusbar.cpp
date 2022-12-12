@@ -14,8 +14,55 @@ RPFStatusBar::RPFStatusBar(QWidget *parent) :
 RPFStatusBar::~RPFStatusBar()
 {
     delete ui;
+    uninit_button();
 }
+void RPFStatusBar::destroyMainLayoutWidget(QLayout* layout){
+    if(layout == nullptr) return;
+     QLayoutItem *child;
+    int num = layout->count();
+    if(num > 0 && !layout->isEmpty()){
+        while ((child = layout->takeAt(0)) != nullptr) {
+            if(child->widget())
+            {
+                child->widget()->setParent(nullptr);
+            }
+            else if(child->layout()){
+                destroyMainLayoutWidget(child->layout());
+            }
+             //delete child;
+        }
+    }
 
+}
+ void RPFStatusBar::uninit_button()
+ {
+    destroyMainLayoutWidget(baseLayout);
+    if(rfablatin_button)
+    {
+        delete rfablatin_button;
+        rfablatin_button = nullptr;
+    }
+    if(pfablation_button)
+    {
+        delete pfablation_button;
+        pfablation_button = nullptr;
+    }
+    if(baseLayout)
+    {
+        delete baseLayout;
+        baseLayout = nullptr;
+    }
+    if(hBoxLayout)
+    {
+        delete hBoxLayout;
+        hBoxLayout = nullptr;
+    }
+    if(horizontalSpacer1)
+    {
+        delete horizontalSpacer1;
+        horizontalSpacer1 = nullptr;
+    }
+ }
 void RPFStatusBar::init_button()
 {
     if (rfablatin_button == nullptr) {

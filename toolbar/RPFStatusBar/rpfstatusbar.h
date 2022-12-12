@@ -18,7 +18,9 @@ public:
     ~RPFStatusBar();
 
     void init_button();
+    void uninit_button();
 
+    void destroyMainLayoutWidget(QLayout* layout);
 private:
     Ui::RPFStatusBar *ui;
 
