@@ -35,9 +35,9 @@ SOURCES += \
     toolbar/accuCustomplot/qcustomplot.cpp \
     toolbar/settingpage/setting.cpp \
     toolbar/catheterpresetWidget/AblationPreset.cpp \
-    toolbar/catheterpresetsetting/catheterpresetsetting.cpp \
-    toolbar/catheterpresetsetting/settingpage.cpp \
-    toolbar/catheterpresetsetting/settingpagebuttons.cpp \
+#    toolbar/catheterpresetsetting/catheterpresetsetting.cpp \
+#    toolbar/catheterpresetsetting/settingpage.cpp \
+#    toolbar/catheterpresetsetting/settingpagebuttons.cpp \
     toolbar/customWidgets/PfasButton.cxx \
     toolbar/settingpage/setting.cpp \
     toolbar/customWidgets/SwitchButton.cxx
@@ -68,9 +68,9 @@ HEADERS += \
     toolbar/accuCustomplot/qcustomplot.h \
     toolbar/settingpage/setting.h \
     toolbar/catheterpresetWidget/AblationPreset.h \
-    toolbar/catheterpresetsetting/catheterpresetsetting.h \
-    toolbar/catheterpresetsetting/settingpage.h \
-    toolbar/catheterpresetsetting/settingpagebuttons.h \
+#    toolbar/catheterpresetsetting/catheterpresetsetting.h \
+#    toolbar/catheterpresetsetting/settingpage.h \
+#    toolbar/catheterpresetsetting/settingpagebuttons.h \
     toolbar/customWidgets/PfasButton.h \
     toolbar/settingpage/setting.h \
     toolbar/customWidgets/SwitchButton.h
@@ -95,9 +95,9 @@ FORMS += \
     toolbar/accuCustomplot/customwidget.ui \
     toolbar/settingpage/setting.ui \
     toolbar/catheterpresetWidget/AblationPreset.ui \
-    toolbar/catheterpresetsetting/catheterpresetsetting.ui \
-    toolbar/catheterpresetsetting/settingpage.ui \
-    toolbar/catheterpresetsetting/settingpagebuttons.ui \
+#    toolbar/catheterpresetsetting/catheterpresetsetting.ui \
+#    toolbar/catheterpresetsetting/settingpage.ui \
+#    toolbar/catheterpresetsetting/settingpagebuttons.ui \
     toolbar/settingpage/setting.ui \
     toolbar/accuCustomplot/ecgcustomwidget.ui
 
