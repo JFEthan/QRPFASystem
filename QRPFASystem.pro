@@ -33,17 +33,14 @@ SOURCES += \
     toolbar/accuCustomplot/customwidget.cpp \
     toolbar/accuCustomplot/ecgcustomwidget.cpp \
     toolbar/accuCustomplot/qcustomplot.cpp \
-<<<<<<< HEAD
+    toolbar/settingpage/setting.cpp \
     toolbar/catheterpresetWidget/AblationPreset.cpp \
     toolbar/catheterpresetsetting/catheterpresetsetting.cpp \
     toolbar/catheterpresetsetting/settingpage.cpp \
     toolbar/catheterpresetsetting/settingpagebuttons.cpp \
     toolbar/customWidgets/PfasButton.cxx \
-    toolbar/settingpage/setting.cpp
-=======
-    toolbar/customWidgets/PfasButton.cxx \
+    toolbar/settingpage/setting.cpp \
     toolbar/customWidgets/SwitchButton.cxx
->>>>>>> 51ef0f634047234ca930995a6835f3faa1d38f05
 
 HEADERS += \
     ablationPage/ablationpage.h \
@@ -69,17 +66,14 @@ HEADERS += \
     toolbar/accuCustomplot/customwidget.h \
     toolbar/accuCustomplot/ecgcustomwidget.h \
     toolbar/accuCustomplot/qcustomplot.h \
-<<<<<<< HEAD
+    toolbar/settingpage/setting.h \
     toolbar/catheterpresetWidget/AblationPreset.h \
     toolbar/catheterpresetsetting/catheterpresetsetting.h \
     toolbar/catheterpresetsetting/settingpage.h \
     toolbar/catheterpresetsetting/settingpagebuttons.h \
     toolbar/customWidgets/PfasButton.h \
-    toolbar/settingpage/setting.h
-=======
-    toolbar/customWidgets/PfasButton.h \
+    toolbar/settingpage/setting.h \
     toolbar/customWidgets/SwitchButton.h
->>>>>>> 51ef0f634047234ca930995a6835f3faa1d38f05
 
 FORMS += \
     ablationPage/ablationpage.ui \
@@ -99,15 +93,14 @@ FORMS += \
     toolbar/RPFStatusBar/rpfstatusbar.ui \
     toolbar/RingElectrodebar/ringelectrodebar.ui \
     toolbar/accuCustomplot/customwidget.ui \
-<<<<<<< HEAD
+    toolbar/settingpage/setting.ui \
     toolbar/catheterpresetWidget/AblationPreset.ui \
     toolbar/catheterpresetsetting/catheterpresetsetting.ui \
     toolbar/catheterpresetsetting/settingpage.ui \
     toolbar/catheterpresetsetting/settingpagebuttons.ui \
-    toolbar/settingpage/setting.ui
-=======
+    toolbar/settingpage/setting.ui \
     toolbar/accuCustomplot/ecgcustomwidget.ui
->>>>>>> 51ef0f634047234ca930995a6835f3faa1d38f05
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
