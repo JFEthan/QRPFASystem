@@ -7,8 +7,6 @@
 #include "rfablationcontent.h"
 #include "rfpuncturecontent.h"
 #include "rpfasummarycontent.h"
-#include "catheterpreset.h"
-#include "./toolbar/settingpage/setting.h"
 
 AblationPage::AblationPage(QWidget *parent) :
     PfasPage(parent),
@@ -38,15 +36,10 @@ void AblationPage::OnCreate()
     rf_ablation_content = new RfAblationContent(this);
     rf_puncturen_content = new RfPunctureContent(this);
     rpfa_summary_comtent = new RPFASummaryContent(this);
-    catheter_preset = new catheterpreset(this);
-    setting_page = new setting(this);
-
     ui->stackedWidget->addWidget(pf_ablation_content);
     ui->stackedWidget->addWidget(rf_ablation_content);
     ui->stackedWidget->addWidget(rf_puncturen_content);
     ui->stackedWidget->addWidget(rpfa_summary_comtent);
-    ui->stackedWidget->addWidget(catheter_preset);
-    ui->stackedWidget->addWidget(setting_page);
 
     ui->stackedWidget->setCurrentWidget(pf_ablation_content);
 
@@ -56,8 +49,7 @@ void AblationPage::OnCreate()
     connect(ui->pageSwitchBar, SIGNAL(RFAblationButtonClicked()), this, SLOT(OnRFAblationButtonClicked()));
     connect(ui->pageSwitchBar, SIGNAL(PFPunctureButtonClicked()), this, SLOT(OnPFPunctureButtonClicked()));
     connect(ui->pageSwitchBar, SIGNAL(PostButtonClicked()), this, SLOT(OnPostButtonClicked()));
-    connect(ui->btnSetting, SIGNAL(clicked()), this, SLOT(OnbtnSettingClicked()));
-    connect(ui->btnCatheter, SIGNAL(clicked()), this, SLOT(OnbtnCatheterClicked()));
+
 }
 void AblationPage::OnDestroy()
 {
@@ -119,13 +111,4 @@ void AblationPage::OnPFPunctureButtonClicked()
 void AblationPage::OnPostButtonClicked()
 {
      ui->stackedWidget->setCurrentWidget(rpfa_summary_comtent);
-}
-void AblationPage::OnbtnCatheterClicked()
-{
-     ui->stackedWidget->setCurrentWidget(catheter_preset);
-}
-
-void AblationPage::OnbtnSettingClicked()
-{
-     ui->stackedWidget->setCurrentWidget(setting_page);
 }

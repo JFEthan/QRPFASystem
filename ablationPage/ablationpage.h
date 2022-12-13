@@ -8,8 +8,6 @@ class PfAblationContent;
 class RfAblationContent;
 class RfPunctureContent;
 class RPFASummaryContent;
-class catheterpreset;
-class setting;
 
 namespace Ui {
 class AblationPage;
@@ -37,8 +35,6 @@ public slots:
    void OnRFAblationButtonClicked();
    void OnPFPunctureButtonClicked();
    void OnPostButtonClicked();
-   void OnbtnCatheterClicked();
-   void OnbtnSettingClicked();
 private:
     virtual void paintEvent(QPaintEvent *event);
 
@@ -48,8 +44,6 @@ private:
     RfAblationContent *rf_ablation_content = nullptr;
     RfPunctureContent *rf_puncturen_content = nullptr;
     RPFASummaryContent *rpfa_summary_comtent = nullptr;
-    catheterpreset *catheter_preset = nullptr;
-    setting *setting_page = nullptr;
 };
 
 #endif // ABLATIONPAGE_H

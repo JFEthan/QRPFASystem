@@ -38,6 +38,16 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
+   <item row="0" column="0">
+    <widget class="CustomWidget" name="widget" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>200</width>
+       <height>200</height>
+      </size>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="sizeConstraint">
@@ -50,7 +60,7 @@
       <number>80</number>
      </property>
      <item>
-      <widget class="QPushButton" name="btnAblationPreset">
+      <widget class="QPushButton" name="pushButton">
        <property name="maximumSize">
         <size>
          <width>16777215</width>
@@ -93,20 +103,15 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="0">
-    <widget class="QStackedWidget" name="RFAblationwidget">
-     <property name="minimumSize">
-      <size>
-       <width>200</width>
-       <height>200</height>
-      </size>
-     </property>
-     <widget class="QWidget" name="widgetPage1" native="true"/>
-    </widget>
-   </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>CustomWidget</class>
+   <extends>QWidget</extends>
+   <header>toolbar/accuCustomplot/customwidget.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>RFActionbar</class>
    <extends>QWidget</extends>

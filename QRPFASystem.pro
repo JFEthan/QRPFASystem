@@ -11,7 +11,6 @@ CONFIG += c++11
 
 SOURCES += \
     ablationPage/ablationpage.cpp \
-    ablationPage/catheterpreset.cpp \
     ablationPage/pfablationcontent.cpp \
     ablationPage/rfablationcontent.cpp \
     ablationPage/rfpuncturecontent.cpp \
@@ -27,6 +26,7 @@ SOURCES += \
     toolbar/PFActionbar/pfactionbar.cpp \
     toolbar/PFIntegratedaBar/pfintegratedabar.cpp \
     toolbar/Pageswitchbar/pageswitchbar.cpp \
+    toolbar/Puncturebar/puncturebar.cpp \
     toolbar/RFActionbar/rfactionbar.cpp \
     toolbar/RPFStatusBar/rpfstatusbar.cpp \
     toolbar/RingElectrodebar/ringelectrodebar.cpp \
@@ -34,17 +34,10 @@ SOURCES += \
     toolbar/accuCustomplot/ecgcustomwidget.cpp \
     toolbar/accuCustomplot/qcustomplot.cpp \
     toolbar/customWidgets/PfasButton.cxx \
-    toolbar/settingpage/setting.cpp \
-    toolbar/catheterpresetWidget/AblationPreset.cpp \
-#    toolbar/catheterpresetsetting/catheterpresetsetting.cpp \
-#    toolbar/catheterpresetsetting/settingpage.cpp \
-#    toolbar/catheterpresetsetting/settingpagebuttons.cpp \
-    toolbar/settingpage/setting.cpp \
     toolbar/customWidgets/SwitchButton.cxx
 
 HEADERS += \
     ablationPage/ablationpage.h \
-    ablationPage/catheterpreset.h \
     ablationPage/pfablationcontent.h \
     ablationPage/rfablationcontent.h \
     ablationPage/rfpuncturecontent.h \
@@ -60,6 +53,7 @@ HEADERS += \
     toolbar/PFActionbar/pfactionbar.h \
     toolbar/PFIntegratedaBar/pfintegratedabar.h \
     toolbar/Pageswitchbar/pageswitchbar.h \
+    toolbar/Puncturebar/puncturebar.h \
     toolbar/RFActionbar/rfactionbar.h \
     toolbar/RPFStatusBar/rpfstatusbar.h \
     toolbar/RingElectrodebar/ringelectrodebar.h \
@@ -67,17 +61,10 @@ HEADERS += \
     toolbar/accuCustomplot/ecgcustomwidget.h \
     toolbar/accuCustomplot/qcustomplot.h \
     toolbar/customWidgets/PfasButton.h \
-    toolbar/settingpage/setting.h \
-    toolbar/catheterpresetWidget/AblationPreset.h \
-#    toolbar/catheterpresetsetting/catheterpresetsetting.h \
-#    toolbar/catheterpresetsetting/settingpage.h \
-#    toolbar/catheterpresetsetting/settingpagebuttons.h \
-    toolbar/settingpage/setting.h \
     toolbar/customWidgets/SwitchButton.h
 
 FORMS += \
     ablationPage/ablationpage.ui \
-    ablationPage/catheterpreset.ui \
     ablationPage/pfablationcontent.ui \
     ablationPage/rfablationcontent.ui \
     ablationPage/rfpuncturecontent.ui \
@@ -89,17 +76,11 @@ FORMS += \
     toolbar/PFActionbar/pfactionbar.ui \
     toolbar/PFIntegratedaBar/pfintegratedabar.ui \
     toolbar/Pageswitchbar/pageswitchbar.ui \
+    toolbar/Puncturebar/puncturebar.ui \
     toolbar/RFActionbar/rfactionbar.ui \
     toolbar/RPFStatusBar/rpfstatusbar.ui \
     toolbar/RingElectrodebar/ringelectrodebar.ui \
     toolbar/accuCustomplot/customwidget.ui \
-    toolbar/accuCustomplot/ecgcustomwidget.ui
-    toolbar/settingpage/setting.ui \
-    toolbar/catheterpresetWidget/AblationPreset.ui \
-#    toolbar/catheterpresetsetting/catheterpresetsetting.ui \
-#    toolbar/catheterpresetsetting/settingpage.ui \
-#    toolbar/catheterpresetsetting/settingpagebuttons.ui \
-    toolbar/settingpage/setting.ui \
     toolbar/accuCustomplot/ecgcustomwidget.ui
 
 # Default rules for deployment.
