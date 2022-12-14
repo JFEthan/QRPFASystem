@@ -60,15 +60,12 @@ void AblationPreset::Init()
     ui->tableWidget->setStyleSheet("QTableWidget::item{border:2px solid rgb(12, 75, 153);background-color:white;}QTableWidget::item:selected{background:lightblue;}");
     ui->tableWidget_2->setStyleSheet("QTableWidget::item{border:2px solid rgb(12, 75, 153);background-color:white;}QTableWidget::item:selected{background:lightblue;}");
 
-
-
-
     ui->btnPresetEdit->setStyleSheet("background-color:transparent;");
     ui->btnPresetSetting->setStyleSheet("background-color:transparent;");
     ui->btnPresetConfirm->setStyleSheet("background-color:transparent;");
     ui->btnUSB1->setStyleSheet("background-color:transparent;");
     ui->btnUSB2->setStyleSheet("background-color:transparent;");
-    ui->btnAddCatheter->setStyleSheet("background-color:transparent;");
+    ui->btnAddCatheter->setStyleSheet("background-color:transparent;border-radius:10px;");
     ui->btnDeleteCatheter->setStyleSheet("background-color:transparent;");
     ui->btnAddList->setStyleSheet("background-color:transparent;");
     ui->btnDeleteList->setStyleSheet("background-color:transparent;");
